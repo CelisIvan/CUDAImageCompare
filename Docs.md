@@ -5,11 +5,11 @@ This is a program that compares two images in two modes: Hard (pixel by pixel) a
 It uses *Parallel Programming* (CUDA) in order to enhace performance. It works perfectly for small and large images. 
 
 ## Parallel Programming
-
+In very simple terms, it is the use of multiple resources, in this case, processors, to solve a problem. This type of programming takes a problem, breaks it down into a series of smaller steps, delivers instructions, and processors execute the solutions at the same time[1]. So, we are using the facilities that CUDA and NVIDIA give us to take advantage of the architecture. This two tools allow us to create multiple threads that will be in charge of processing a portion of the problem at the same time. 
 
 ## Boosting up my code with CUDA
 ### Linearizing my matrix
-According to OpenCV Docs, images are stored in a container called _Mat_ which is basically a Matrix. The size of the matrix depends of the color system used. More accurately, it depends from the number of channels used. In case of a gray scale (2 channels) image we have something like: [1]
+According to OpenCV Docs, images are stored in a container called _Mat_ which is basically a Matrix. The size of the matrix depends of the color system used. More accurately, it depends from the number of channels used. In case of a gray scale (2 channels) image we have something like: [2]
 
 ![Matrix for grayscale Image](./bwima.png "Figure 1: Matrix for BW image")
 
@@ -55,19 +55,35 @@ So a visual representation for a colored image of what each thread will be doing
 Figure 3: Representation of threads and image array
 
 ### Hard comparison
-This is actually the simplest comparison to do. 
-
+This is actually the simplest comparison to do. It just goes through every pixel and checks if they are exactly the same. If they are not, it will change the color of that pixel to the inverse of it, in order to detect the difference with ease.
 
 
 ### Silhouette comparison
+For this case the only thing that changes is that there is a image pre processing. The image needs to be  transformed to grayscale in order to implement the Canny algorithm to it and detect borders. For more info, visit: [Canny Open CV] (https://docs.opencv.org/master/da/d22/tutorial_py_canny.html)
+
+After the canny images are obtained, these are the ones passed to the same algorithm mentioned above. 
 
 
 ## Use cases
 
 ### FIA's avoiding
+It is useful for careers like Architecture or graphic design where an assigment is create a design or structure. As a teacher you may ask for images from specific perspectives and sizes and then you can see if they are actually original or it's a copy from other partner or previous work.
 
 ### Enterteinment
+Just for fun, you may use it to solve small ridles like the ones that look like this:
+![Image differences](./difs.jpg "Figure 3: Ridle for image differences")
+
+
+
 
 ## How to Run the Application
+You must dowmload the project and wo to the /x64/Release folder and then just execute the _.exe_ file that is in there.  If you want to make comparisons between two specific images, those images should be stored in that folder. Of course, you must have a GPU and CUDA installed.  
+ *Important: the images should be the same size and png format*
+
 
 ## References 
+[1] Best Computer Science Degrees. (2020) _What is parallel programming?_ [https://www.bestcomputersciencedegrees.com/faq/what-is-parallel-programming/#:~:text=In%20very%20simple%20terms%2C%20it,solutions%20at%20the%20same%20time](https://www.bestcomputersciencedegrees.com/faq/what-is-parallel-programming/#:~:text=In%20very%20simple%20terms%2C%20it,solutions%20at%20the%20same%20time)
+
+[2] OpenCV. _How to scan images, lookup tables and time measurement with OpenCV_ [https://docs.opencv.org/3.4/db/da5/tutorial_how_to_scan_images.html](https://docs.opencv.org/3.4/db/da5/tutorial_how_to_scan_images.html)
+
+[3] OpenCV. _Canny Algorithm_. [https://docs.opencv.org/master/da/d22/tutorial_py_canny.html](https://docs.opencv.org/master/da/d22/tutorial_py_canny.html)
