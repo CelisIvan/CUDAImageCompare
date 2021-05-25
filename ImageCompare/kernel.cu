@@ -24,7 +24,7 @@ void Image_Comparisson_CUDA(unsigned char* inputImage, unsigned char* inputImage
 	dim3 gridImage(width*height/512);
 
 	// compare_CUDA << <gridImage, 3 >> > (Dev_Input_Image, Dev_Input_Image2, Dev_outputImage, channels);
-	compare_CUDA << <gridImage, 512 >> > (Dev_Input_Image, Dev_Input_Image2, Dev_outputImage, channels);
+	compare_CUDA << <gridImage, 512 >> > (Dev_Input_Image, Dev_Input_Image2, Dev_outputImage, channels, option);
 
 
 	cudaMemcpy(inputImage, Dev_Input_Image, height * width * channels, cudaMemcpyDeviceToHost);
